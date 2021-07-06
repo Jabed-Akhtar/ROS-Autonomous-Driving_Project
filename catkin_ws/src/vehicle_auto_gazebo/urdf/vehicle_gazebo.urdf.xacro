@@ -1,0 +1,842 @@
+<?xml version='1.0'?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="Vehicle_Model">
+
+	<xacro:include filename="$(find vehicle_auto_gazebo)/urdf/common_properties.xacro"/>
+	<xacro:include filename="$(find vehicle_auto_gazebo)/urdf/vehicle_gazebo_gazebo_plugin.xacro"/>
+	
+	<static>false</static>
+
+    <!-- * * * Link Definitions * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+	<!-- origin_link -->
+	<link name="aaa_origin_link"/>
+
+	<!-- base_link -->
+ 	<link name="base_link">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="3 1.5 0.5"/>
+			</geometry>
+		</collision>
+  		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+      		<mass value="10"/>
+      		<inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.2"/>
+    	</inertial>
+		<visual name="base_link">
+		    <origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="3 1.5 0.5"/>
+			</geometry>
+			<material name="orange"/>
+		</visual>	
+	</link>
+
+	<!-- front_wheel_holder -->
+	<link name="front_wheel_holder">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.3 1 0.3"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="2"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.2"/>
+	    </inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.3 1 0.3"/>
+			</geometry>
+			<material name="green"/>
+		</visual>
+	</link>
+
+	<!-- back_wheel_holder -->
+	<link name="back_wheel_holder">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.3 1 0.3"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="2"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.2"/>
+	    </inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.3 1 0.3"/>
+			</geometry>
+			<material name="green"/>
+		</visual>
+	</link>
+
+	<!-- front_wheel_cyl -->
+	<link name="front_wheel_cyl">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.04" length="1.5"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.5"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.2"/>
+	    </inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.04" length="1.5"/>
+			</geometry>
+			<material name="black_col">
+				<color rgba="0 0 0 1"/>
+		    </material>
+		</visual>
+	</link>
+
+	<!-- back_wheel_cyl -->
+	<link name="back_wheel_cyl">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.04" length="1.5"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.5"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.2"/>
+	    </inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.04" length="1.5"/>
+			</geometry>
+			<material name="black_col">
+				<color rgba="0 0 0 1"/>
+		    </material>
+		</visual>
+	</link>
+
+	<!-- wheel_front_right_link -->
+	<link name="wheel_front_right_link">
+		<pose>0 0 0.21682 0 1.5707 0</pose>
+		<!-- <pose>0 0 0.21682 0 1.5707 0</pose> -->
+		<collision name="collision_wheel_front_right_link">
+			<geometry>
+				<cylinder radius="0.21682" length="0.16116"/>
+			</geometry>
+			<surface>
+			  <friction>
+				<ode>
+				  <mu>1.0</mu>
+				  <mu2>1.0</mu2>
+				  <fdir1>0 0 1</fdir1>
+				  <slip1>0.0</slip1>
+				  <slip2>0.0</slip2>
+				</ode>
+			  </friction>
+			  <contact>
+				<ode>
+				  <min_depth>0.005</min_depth>
+				  <kp>1e8</kp>
+				</ode>
+			  </contact>
+			</surface>
+		</collision>
+		<inertial>
+			<mass value="1"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.2"/>
+	    </inertial>
+		<!--
+		<inertial>
+		  <mass>12</mass>
+		  <inertia>
+			<ixx>0.167005283</ixx>
+			<ixy>0</ixy>
+			<ixz>0</ixz>
+			<iyy>0.167005283</iyy>
+			<iyz>0</iyz>
+			<izz>0.282065474</izz>
+		  </inertia>
+		</inertial>
+	    -->
+		<!--
+		<collision name="collision">
+		  <geometry>
+			<cylinder>
+			  <radius>0.21682</radius>
+			  <length>0.16116</length>
+			</cylinder>
+		  </geometry>
+		  <surface>
+			<friction>
+			  <ode>
+				<mu>1.0</mu>
+				<mu2>1.0</mu2>
+				<fdir1>0 0 1</fdir1>
+				<slip1>0.0</slip1>
+				<slip2>0.0</slip2>
+			  </ode>
+			</friction>
+			<contact>
+			  <ode>
+				<min_depth>0.005</min_depth>
+				<kp>1e8</kp>
+			  </ode>
+			</contact>
+		  </surface>
+		</collision>
+		-->
+		<visual name="visual">
+		  <pose>0 0 -0.08058 0 0 0</pose>
+		  <geometry>
+			<mesh filename="package://vehicle_auto_gazebo/meshes/wheel_front_right.dae"/>
+			  <!-- <uri>model://car_wheel/meshes/car_wheel.dae</uri> -->
+		  </geometry>
+		</visual>
+	</link>
+
+	<!-- wheel_front_left_link -->
+	<link name="wheel_front_left_link">
+		<pose>0 0 0.21682 0 1.5707 1.5707</pose>
+		<!-- <pose>0 0 0.21682 0 1.5707 0</pose> -->
+		<collision name="collision_wheel_front_left_link">
+			<geometry>
+				<cylinder radius="0.21682" length="0.16116"/>
+			</geometry>
+			<surface>
+			  <friction>
+				<ode>
+				  <mu>1.0</mu>
+				  <mu2>1.0</mu2>
+				  <fdir1>0 0 1</fdir1>
+				  <slip1>0.0</slip1>
+				  <slip2>0.0</slip2>
+				</ode>
+			  </friction>
+			  <contact>
+				<ode>
+				  <min_depth>0.005</min_depth>
+				  <kp>1e8</kp>
+				</ode>
+			  </contact>
+			</surface>
+		</collision>
+		<inertial>
+			<mass value="1"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.2"/>
+	    </inertial>
+		<!--
+		<inertial>
+		  <mass>12</mass>
+		  <inertia>
+			<ixx>0.167005283</ixx>
+			<ixy>0</ixy>
+			<ixz>0</ixz>
+			<iyy>0.167005283</iyy>
+			<iyz>0</iyz>
+			<izz>0.282065474</izz>
+		  </inertia>
+		</inertial>
+	    -->
+		<!--
+		<collision name="collision">
+		  <geometry>
+			<cylinder>
+			  <radius>0.21682</radius>
+			  <length>0.16116</length>
+			</cylinder>
+		  </geometry>
+		  <surface>
+			<friction>
+			  <ode>
+				<mu>1.0</mu>
+				<mu2>1.0</mu2>
+				<fdir1>0 0 1</fdir1>
+				<slip1>0.0</slip1>
+				<slip2>0.0</slip2>
+			  </ode>
+			</friction>
+			<contact>
+			  <ode>
+				<min_depth>0.005</min_depth>
+				<kp>1e8</kp>
+			  </ode>
+			</contact>
+		  </surface>
+		</collision>
+		-->
+		<visual name="visual">
+		  <pose>0 0 -0.08058 0 0 0</pose>
+		  <geometry>
+			<mesh filename="package://vehicle_auto_gazebo/meshes/wheel_front_left.dae"/>
+			  <!-- <uri>model://car_wheel/meshes/car_wheel.dae</uri> -->
+		  </geometry>
+		</visual>
+  	</link>
+
+	<!-- wheel_back_right_link -->
+	<link name="wheel_back_right_link">
+		<pose>0 0 0.21682 0 1.5707 1.5707</pose>
+		<!-- <pose>0 0 0.21682 0 1.5707 0</pose> -->
+		<collision name="collision">
+			<geometry>
+				<cylinder radius="0.21682" length="0.16116"/>
+			</geometry>
+			<surface>
+			  <friction>
+				<ode>
+				  <mu>1.0</mu>
+				  <mu2>1.0</mu2>
+				  <fdir1>0 0 1</fdir1>
+				  <slip1>0.0</slip1>
+				  <slip2>0.0</slip2>
+				</ode>
+			  </friction>
+			  <contact>
+				<ode>
+				  <min_depth>0.005</min_depth>
+				  <kp>1e8</kp>
+				</ode>
+			  </contact>
+			</surface>
+		</collision>
+		<inertial>
+			<mass value="1"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.2"/>
+	    </inertial>
+		<!--
+		<inertial>
+		  <mass>12</mass>
+		  <inertia>
+			<ixx>0.167005283</ixx>
+			<ixy>0</ixy>
+			<ixz>0</ixz>
+			<iyy>0.167005283</iyy>
+			<iyz>0</iyz>
+			<izz>0.282065474</izz>
+		  </inertia>
+		</inertial>
+	    -->
+		<!--
+		<collision name="collision">
+		  <geometry>
+			<cylinder>
+			  <radius>0.21682</radius>
+			  <length>0.16116</length>
+			</cylinder>
+		  </geometry>
+		  <surface>
+			<friction>
+			  <ode>
+				<mu>1.0</mu>
+				<mu2>1.0</mu2>
+				<fdir1>0 0 1</fdir1>
+				<slip1>0.0</slip1>
+				<slip2>0.0</slip2>
+			  </ode>
+			</friction>
+			<contact>
+			  <ode>
+				<min_depth>0.005</min_depth>
+				<kp>1e8</kp>
+			  </ode>
+			</contact>
+		  </surface>
+		</collision>
+		-->
+		<visual name="visual">
+		  <pose>0 0 -0.08058 0 0 0</pose>
+		  <geometry>
+			<mesh filename="package://vehicle_auto_gazebo/meshes/wheel_back_right.dae"/>
+			  <!-- <uri>model://car_wheel/meshes/car_wheel.dae</uri> -->
+		  </geometry>
+		</visual>
+  	</link>
+
+	<!-- wheel_back_left_link -->
+	<link name="wheel_back_left_link">
+		<pose>0 0 0.21682 0 1.5707 1.5707</pose>
+		<!-- <pose>0 0 0.21682 0 1.5707 0</pose> -->
+		<collision name="collision">
+			<geometry>
+				<cylinder radius="0.21682" length="0.16116"/>
+			</geometry>
+			<surface>
+			  <friction>
+				<ode>
+				  <mu>1.0</mu>
+				  <mu2>1.0</mu2>
+				  <fdir1>0 0 1</fdir1>
+				  <slip1>0.0</slip1>
+				  <slip2>0.0</slip2>
+				</ode>
+			  </friction>
+			  <contact>
+				<ode>
+				  <min_depth>0.005</min_depth>
+				  <kp>1e8</kp>
+				</ode>
+			  </contact>
+			</surface>
+		</collision>
+		<inertial>
+			<mass value="1"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.2"/>
+	    </inertial>
+		<!--
+		<inertial>
+		  <mass>12</mass>
+		  <inertia>
+			<ixx>0.167005283</ixx>
+			<ixy>0</ixy>
+			<ixz>0</ixz>
+			<iyy>0.167005283</iyy>
+			<iyz>0</iyz>
+			<izz>0.282065474</izz>
+		  </inertia>
+		</inertial>
+	    -->
+		<!--
+		<collision name="collision">
+		  <geometry>
+			<cylinder>
+			  <radius>0.21682</radius>
+			  <length>0.16116</length>
+			</cylinder>
+		  </geometry>
+		  <surface>
+			<friction>
+			  <ode>
+				<mu>1.0</mu>
+				<mu2>1.0</mu2>
+				<fdir1>0 0 1</fdir1>
+				<slip1>0.0</slip1>
+				<slip2>0.0</slip2>
+			  </ode>
+			</friction>
+			<contact>
+			  <ode>
+				<min_depth>0.005</min_depth>
+				<kp>1e8</kp>
+			  </ode>
+			</contact>
+		  </surface>
+		</collision>
+		-->
+		<visual name="visual">
+		  <pose>0 0 -0.08058 0 0 0</pose>
+		  <geometry>
+			<mesh filename="package://vehicle_auto_gazebo/meshes/wheel_back_left.dae"/>
+			  <!-- <uri>model://car_wheel/meshes/car_wheel.dae</uri> -->
+		  </geometry>
+		</visual>
+  	</link>
+
+	<!-- lidar holder link -->
+ 	<link name="lidar_holder">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.05" length="0.2"/>
+			</geometry>
+		</collision>
+
+		<inertial>
+			<mass value="0.01"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.2"/>
+	    </inertial>
+		<visual>
+		    <origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.05" length="0.2"/>
+			</geometry>
+			<material name="laser_col">
+				<color rgba="0 0.49019 0.717647 0.5"/>
+	     	</material>
+		</visual>
+	</link>
+
+	<!-- front camera holder link -->
+	<link name="front_cam_hold">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.05" length="0.2"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.01"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.2"/>
+	    </inertial>
+		<visual>
+		    <origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.02" length="0.05"/>
+			</geometry>
+			<material name="cam_hold_col">
+				<color rgba="0 0.49019 0.717647 1"/>
+		    </material>
+		</visual>	
+	</link>
+
+	<!-- back camera holder link -->
+	<link name="back_cam_hold">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.05" length="0.2"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.01"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.2"/>
+	    </inertial>
+		<visual>
+		    <origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.02" length="0.05"/>
+			</geometry>
+			<material name="cam_hold_col">
+				<color rgba="0 0.49019 0.717647 1"/>
+		    </material>
+		</visual>	
+	</link>
+
+	<!-- right camera holder link -->
+	<link name="right_cam_hold">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.05" length="0.2"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.01"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.2"/>
+	    </inertial>
+		<visual>
+		    <origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.02" length="0.05"/>
+			</geometry>
+			<material name="cam_hold_col">
+				<color rgba="0 0.49019 0.717647 1"/>
+		    </material>
+		</visual>	
+	</link>
+
+	<!-- left camera holder link -->
+	<link name="left_cam_hold">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.05" length="0.2"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.01"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.2"/>
+	    </inertial>
+		<visual>
+		    <origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.02" length="0.05"/>
+			</geometry>
+			<material name="cam_hold_col">
+				<color rgba="0 0.49019 0.717647 1"/>
+		    </material>
+		</visual>	
+	</link>
+
+	<!-- Hokuyo Laser -->
+	<link name="hokuyo_laser">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://vehicle_auto_gazebo/meshes/gazebo_models_master/hokuyo/meshes/hokuyo.dae"/>
+			</geometry>
+		</visual>
+	</link>
+
+	<!-- front camera -->
+ 	<link name="front_camera">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+		  		<box size="0.05 0.1 0.05"/>
+			</geometry>
+		</collision>
+
+		<visual>
+		    <origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.05 0.1 0.05"/>
+			</geometry>
+			<material name="cam_col"/>
+		</visual>
+
+		<inertial>
+			<mass value="0.01" />
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+		</inertial>
+
+	</link>
+
+	<!-- back camera -->
+ 	<link name="back_camera">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+		  		<box size="0.05 0.1 0.05"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.01" />
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+		</inertial>
+		<visual>
+		    <origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.05 0.1 0.05"/>
+			</geometry>
+			<material name="cam_col"/>
+		</visual>
+	</link>
+
+	<!-- right camera -->
+ 	<link name="right_camera">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+		  		<box size="0.05 0.1 0.05"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.01" />
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+		</inertial>
+		<visual>
+		    <origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.05 0.1 0.05"/>
+			</geometry>
+			<material name="cam_col"/>
+		</visual>
+	</link>
+
+	<!-- left camera -->
+ 	<link name="left_camera">
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+		  		<box size="0.05 0.1 0.05"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<mass value="0.01" />
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+		</inertial>
+		<visual>
+		    <origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.05 0.1 0.05"/>
+			</geometry>
+			<material name="cam_col"/>
+		</visual>
+	</link>
+
+
+<!--	
+	<link name="eyes_link">
+		<visual>
+			<origin xyz="0 0 0.035" rpy="0 0 0" />
+			<geometry>
+				<box size="0.01 0.04 0.01" />
+			</geometry>
+	     	<material name="Blue2">
+				<color rgba="0 0 0.7 1.0"/>
+			</material>
+	   </visual>
+	</link>
+-->
+
+	<!-- * * * Joint Definitions * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+	<!-- base joint - origin link to base link -->
+	<joint name="base_joint" type="fixed">
+		<parent link="aaa_origin_link" />
+		<child link="base_link" />
+		<origin xyz="0 0 0.7" rpy="0 0 0" />
+	</joint>
+
+	<!-- base_link - front_wheel_holder joint -->
+	<joint name="base_front_wheel_holder" type="fixed">
+        <parent link="base_link"/>
+		<child link="front_wheel_holder"/>
+		<origin xyz="1 0 -0.4" rpy="0 0 0"/>
+	</joint>
+
+	<!-- base_link - back_wheel_holder joint -->
+	<joint name="base_back_wheel_holder" type="fixed">
+		<parent link="base_link"/>
+		<child link="back_wheel_holder"/>
+		<origin xyz="-1 0 -0.4" rpy="0 0 0"/>
+	</joint>
+
+	<!-- base_link - front_wheel_cyl joint -->
+	<joint name="base_front_wheel_cyl" type="fixed">
+		<parent link="front_wheel_holder"/>
+		<child link="front_wheel_cyl"/>
+		<origin xyz="0 0 -0.1" rpy="1.570796327 0 0"/>
+	</joint>
+
+	<!-- base_link - back_wheel_cyl joint -->
+	<joint name="base_back_wheel_cyl" type="fixed">
+		<parent link="back_wheel_holder"/>
+		<child link="back_wheel_cyl"/>
+		<origin xyz="0 0 -0.1" rpy="1.570796327 0 0"/>
+	</joint>
+
+	<!-- - - - - - - WHEELS - - - - - - - -->
+
+	<!-- base wheel front right joint joint -->
+	<joint name="base_wheel_front_right_joint" type="fixed">
+		<parent link="front_wheel_cyl"/>
+		<child link="wheel_front_right_link" />
+		<origin xyz="0 0 0.75" rpy="3.141592654 0 0" />
+		<!-- <origin xyz="0 0 0.75" rpy="4.71238898 0 0" /> -->
+	</joint>
+
+	<!-- base wheel front left joint -->
+	<joint name="base_wheel_front_left_joint" type="fixed">
+		<parent link="front_wheel_cyl"/>
+		<child link="wheel_front_left_link" />
+		<origin xyz="0 0 -0.75" rpy="0 0 0" />
+		<!-- <origin xyz="0 0 -0.75" rpy="1.57075 0 0" /> -->
+	</joint>
+
+	<!-- base wheel back right joint -->
+	<joint name="base_wheel_back_right_joint" type="fixed">
+		<parent link="back_wheel_cyl"/>
+		<child link="wheel_back_right_link" />
+		<origin xyz="0 0 0.75" rpy="3.141592654 0 0" />
+		<!-- <origin xyz="0 0 0.75" rpy="4.71238898 0 0" /> -->
+	</joint>
+
+	<!-- base wheel back left joint -->
+	<joint name="base_wheel_back_left_joint" type="fixed">
+		<parent link="back_wheel_cyl"/>
+		<child link="wheel_back_left_link" />
+		<origin xyz="0 0 -0.75" rpy="0 0 0" />
+		<!-- <origin xyz="0 0 -0.75" rpy="1.57075 0 0" /> -->
+	</joint>
+
+	<!-- base upper laser joint -->
+	<joint name="base_lidar_holder_joint" type="fixed">
+    	<parent link="base_link"/>
+    	<child link="lidar_holder"/>
+    	<origin xyz="1 0 0.35" rpy="0 0 0"/>
+	</joint>
+
+	<!-- base front camera holder joint -->
+	<joint name="base_front_cam_holder_joint" type="fixed">
+    	<parent link="base_link"/>
+    	<child link="front_cam_hold"/>
+    	<origin xyz="1.3 0 0.275" rpy="0 0 0"/>
+	</joint>
+
+	<!-- base back camera holder joint -->
+	<joint name="base_back_cam_holder_joint" type="fixed">
+    	<parent link="base_link"/>
+    	<child link="back_cam_hold"/>
+    	<origin xyz="-1.3 0 0.275" rpy="0 0 0"/>
+	</joint>
+
+	<!-- base right camera holder joint -->
+	<joint name="base_right_cam_holder_joint" type="fixed">
+    	<parent link="base_link"/>
+    	<child link="right_cam_hold"/>
+    	<origin xyz="0.5 -0.55 0.275" rpy="0 0 0"/>
+	</joint>
+
+	<!-- base left camera holder joint -->
+	<joint name="base_left_cam_holder_joint" type="fixed">
+    	<parent link="base_link"/>
+    	<child link="left_cam_hold"/>
+    	<origin xyz="0.5 0.55 0.275" rpy="0 0 0"/>
+	</joint>
+
+	<!-- base front_camera joint -->
+	<joint name="base_front_camera_joint" type="fixed">
+    	<parent link="front_cam_hold"/>
+    	<child link="front_camera"/>
+		<!-- <origin xyz="2.325 0 0" rpy="0 1.570796327 0"/>  - 3.141592654 -->
+    	<origin xyz="0 0 0.05" rpy="0 0 0"/>
+	</joint>
+
+	<!-- base back_camera joint -->
+	<joint name="base_back_camera_joint" type="fixed">
+    	<parent link="back_cam_hold"/>
+    	<child link="back_camera"/>
+		<!-- <origin xyz="-2.325 0 0" rpy="0 1.570796327 0"/>  - 3.141592654 -->
+    	<origin xyz="0 0 0.05" rpy="0 0 3.141592654"/>
+	</joint>
+
+	<!-- base right_camera joint -->
+	<joint name="base_right_camera_joint" type="fixed">
+    	<parent link="right_cam_hold"/>
+    	<child link="right_camera"/>
+		<!-- <origin xyz="0 0.89 0" rpy="1.570796327 0 0"/> - 4.71238898 -->
+    	<origin xyz="0 0 0.05" rpy="0 0 4.71238898"/>
+	</joint>
+
+	<!-- base left_camera joint -->
+	<joint name="base_left_camera_joint" type="fixed">
+    	<parent link="left_cam_hold"/>
+    	<child link="left_camera"/>
+		<!-- <origin xyz="0 -0.89 0" rpy="1.570796327 0 0"/> -->
+    	<origin xyz="0 0 0.05" rpy="0 0 1.570796327"/>
+	</joint>
+
+	<!-- Hokuyo Laser joint-->
+	<joint name="hokuyo_laser_joint" type="fixed">
+		<parent link="lidar_holder"/>
+		<child link="hokuyo_laser"/>
+		<!-- <origin xyz="0.8 0 0.365" rpy="0 0 0" /> - 0.05 -->
+		<origin xyz="0 0 0.125" rpy="0 0 0" />
+	</joint>
+
+<!--	
+	<joint name="eyes_joint" type="fixed">
+    	<parent link="head_link" />
+    	<child link="eyes_link" />
+    	<origin xyz="0.02 0 0.03" rpy="0 0 0" />
+	</joint>
+-->
+	
+</robot>
+
+<!-- ******************************* END OF FILE ******************************* -->

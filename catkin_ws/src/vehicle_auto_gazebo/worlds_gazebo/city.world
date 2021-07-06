@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="default">
+
+    <!-- ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- sun -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- gas station -->
+    <include>
+      <uri>model://gas_station</uri>
+      <name>gas_station</name>
+      <pose>-2.0 7.0 0 0 0 0</pose>
+    </include>
+
+    <!-- camera_1 -> to be done -->
+    <include>
+      <uri>model://camera</uri>
+      <pose>0 -3.5 0 0 0 0</pose>
+      <name>camera_1</name>
+    </include>
+
+    <!-- bus_1 -->
+    <include>
+      <uri>model://bus</uri>
+      <name>bus_1</name>
+      <pose>-22.0 10.0 0 0 0 0</pose>
+    </include>
+
+    <!-- bus_2 -->
+    <include>
+      <uri>model://bus</uri>
+      <name>bus_2</name>
+      <pose>-3.0 -15.0 0 0 0 1.570796327</pose>
+    </include>
+
+    <!-- 3 houses -->
+    <include>
+      <uri>model://house_1</uri>
+      <pose>-15 40 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://house_2</uri>
+      <pose>5 40 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://house_3</uri>
+      <pose>-40 -20 0 0 0 -1.570796327</pose>
+    </include>
+
+    <!-- roads -->
+    <road name="my_road">
+      <width>7.34</width>
+      <point>0 0 0</point>
+      <point>100 0 0</point>
+      <pose>20 0 0 0 0 0</pose>
+    </road>
+
+  </world>
+</sdf>

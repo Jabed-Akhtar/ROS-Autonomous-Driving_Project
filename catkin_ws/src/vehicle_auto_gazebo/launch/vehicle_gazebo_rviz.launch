@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <!-- use below Idea for publishing tf frame -->
+    <!-- rosrun tf static_transform_publisher 0 0 0 0 0 0 map base_link 50 -->
+
+    <!-- <arg name="set_frame_id" default="hokuyo_laser_frame"/> -->
+
+    <!-- launching robot state publisher at beginning -> otherwise there will be problem  with launching robot links/joints -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    </node>    
+
+    <!-- launching Gazebo with Vehicle simulated in it -->
+    <include file="$(find vehicle_auto_gazebo)/launch/vehicle_gazebo_gazebo.launch"/>
+
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find vehicle_auto_gazebo)/urdf/vehicle_gazebo.urdf.xacro'"/>
+
+    <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
+        <param name="use_gui" value="False"/>
+
+        
+
+    </node>
+    
+
+    <node pkg="rviz" type="rviz" name="rviz">
+        
+    </node>
+
+    <!-- loading image procesing Node -->
+    <!--
+    <node pkg="car_autonom" name="img_proc" type="image_proce_sub.py" output="screen">
+    </node>
+    -->
+
+    <!-- loading Laser Scanner Node -->
+    <!--
+    <node pkg="car_autonom" name="laser_scan_py" type="laser_scan_sub.py" output="screen">
+    </node>
+    -->
+
+</launch>

@@ -1,0 +1,16 @@
+
+# using kitti2bag (source github)
+	- go to files with zip files
+		*drive_..._sync.zip
+		*calib.zip
+	- unzip *drive_..._sync.zip
+	- unzip *calib.zip
+	- kitti2bag -t 2011_09_26 -r 0002 raw_synced .
+	
+# ruing bag files
+	- rqt_bag
+	- rosbag play -l <ame.bag>
+	- rviz
+
+# ------------------------------ END OF FILE -----------------------------
+

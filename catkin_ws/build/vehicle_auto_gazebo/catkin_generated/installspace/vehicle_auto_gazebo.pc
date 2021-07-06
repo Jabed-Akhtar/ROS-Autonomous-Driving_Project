@@ -1,0 +1,8 @@
+prefix=/home/samir/Samir/Projects/vehicle_auto_ai_ros_ws/catkin_ws/install
+
+Name: vehicle_auto_gazebo
+Description: Description of vehicle_auto_gazebo
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
