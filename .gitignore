@@ -1,3 +1,18 @@
-**/build
-**/log
-**/__pycache__
+# Catkin and Colcon build files
+**/build/
+**/devel/
+**/install/
+**/log/
+**/.colcon/
+
+# ROS cache files
+**/.catkin_workspace
+**/.rosinstall
+
+# CMake and Python cache files
+CMakeCache.txt
+#CMakeFiles/
+cmake_install.cmake
+*.pyc
+*.pyo
+**/__pycache__/
