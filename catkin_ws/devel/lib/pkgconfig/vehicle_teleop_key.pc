@@ -1,8 +1,0 @@
-prefix=/home/samir/Samir/Projects/vehicle_auto_ai_ros_ws/catkin_ws/devel
-
-Name: vehicle_teleop_key
-Description: Description of vehicle_teleop_key
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

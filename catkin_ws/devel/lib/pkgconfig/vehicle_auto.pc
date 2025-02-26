@@ -1,8 +1,0 @@
-prefix=/home/samir/Samir/Projects/vehicle_auto_ai_ros_ws/catkin_ws/devel
-
-Name: vehicle_auto
-Description: Description of vehicle_auto
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
