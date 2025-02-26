@@ -1,2 +1,0 @@
-vehicle_auto:vehicle_auto_gazebo:vehicle_teleop_key
--DCATKIN_DEVEL_PREFIX=/home/samir/Samir/Projects/vehicle_auto_ai_ros_ws/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/samir/Samir/Projects/vehicle_auto_ai_ros_ws/catkin_ws/install -G Unix Makefiles
